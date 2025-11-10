@@ -116,25 +116,36 @@ Multiple self-study guides are available that require no prerequisites and consi
 **Definition:** Mathematical frameworks that represent hypothesized causal relationships between variables, often visualized as Directed Acyclic Graphs (DAGs).
 
 **Key Components:**
-- Variables and their relationships
-- Structural equations
-- Error terms representing unobserved factors
+- **Variables:** Observable and latent factors in the system
+- **Structural equations:** Mathematical relationships defining how each variable is determined by others
+- **Error terms:** Represent unobserved factors and randomness
+- **Causal graph:** Visual representation of the relationships
 
-**Example:** An SCM might model how educational interventions impact student performance, including confounding variables like socioeconomic status.
+**Example:** An SCM for educational outcomes might include:
+- Variables: Study hours (X), Test score (Y), Motivation (Z)
+- Structural equation: Y = f(X, Z) + ε
+- Graph showing: Motivation → Study hours → Test score, with socioeconomic status as a confounder
 
 ### 2. Causal Graphical Models (Directed Acyclic Graphs - DAGs)
 
 **Purpose:** Visual representation of causal relationships
 
 **Key Features:**
-- Nodes represent variables
-- Directed edges represent causal influences
-- No cycles allowed (acyclic property)
+- **Nodes:** Represent variables in the system
+- **Directed edges:** Arrow from X to Y means X causally influences Y
+- **Acyclic property:** No variable can be its own ancestor (no cycles)
+
+**Important Concepts:**
+- **Confounder:** Variable that affects both treatment and outcome
+- **Mediator:** Variable on the causal path from treatment to outcome
+- **Collider:** Variable that is affected by two other variables
+- **d-separation:** Graphical criterion for conditional independence
 
 **Use Cases:**
-- Identifying confounders
-- Determining valid adjustment sets
-- Planning interventions
+- Identifying confounders requiring adjustment
+- Determining valid adjustment sets for unbiased estimation
+- Planning interventions and predicting their effects
+- Understanding backdoor and frontdoor paths
 
 ### 3. Counterfactual Reasoning
 
@@ -155,31 +166,43 @@ Multiple self-study guides are available that require no prerequisites and consi
 **Core Concept:** A formal mathematical framework for reasoning about causality and interventions
 
 **Key Elements:**
-- **Observation:** P(Y|X) - seeing what happens
-- **Intervention:** P(Y|do(X)) - actively changing X
-- **Counterfactuals:** What would have happened
+- **Observation:** P(Y|X) - seeing what happens when X is observed
+- **Intervention:** P(Y|do(X)) - actively setting X to a value (intervention)
+- **Counterfactuals:** What would have happened under different circumstances
 
-**Three Rules of do-calculus:** Enable transformation of causal queries into statistical quantities
+**Three Rules of do-calculus:**
+1. **Rule 1 (Insertion/deletion of observations):** Determines when observations can be added or removed
+2. **Rule 2 (Action/observation exchange):** Determines when interventions and observations are equivalent
+3. **Rule 3 (Insertion/deletion of actions):** Determines when interventions can be added or removed
+
+These rules enable transformation of causal queries into statistical quantities that can be estimated from data.
 
 ### 5. Potential Outcomes Framework (Rubin Causal Model)
 
 **Core Idea:** Each unit has potential outcomes under different treatment conditions
 
 **Key Concepts:**
-- Treatment effects
-- CATE (Conditional Average Treatment Effect)
-- ITE (Individual Treatment Effect)
-- ATE (Average Treatment Effect)
+- **ATE (Average Treatment Effect):** Average effect across entire population
+- **CATE (Conditional Average Treatment Effect):** Average effect for a subgroup with specific characteristics
+- **ITE (Individual Treatment Effect):** Effect for a specific individual
+- **SUTVA (Stable Unit Treatment Value Assumption):** Treatment of one unit doesn't affect outcomes of others
+
+**Example:** In a drug trial, each patient has two potential outcomes: health status if they receive the drug Y(1) and health status if they receive placebo Y(0). The individual treatment effect is Y(1) - Y(0), but we can only observe one outcome per patient.
 
 ### 6. Causal Discovery
 
-**Goal:** Learn causal structure from data
+**Goal:** Learn causal structure from data without prior knowledge of the causal graph
 
-**Approaches:**
-- Constraint-based methods (PC algorithm)
-- Score-based methods (GES)
-- Functional causal models
-- Gradient-based methods
+**Main Approaches:**
+- **Constraint-based methods:** Use conditional independence tests (e.g., PC algorithm, FCI)
+- **Score-based methods:** Optimize a score function (e.g., GES, NOTEARS)
+- **Functional causal models:** Exploit non-linearity and noise structure (e.g., LiNGAM, ANM)
+- **Gradient-based methods:** Use continuous optimization for DAG learning
+
+**Challenges:**
+- Requires strong assumptions (e.g., causal sufficiency, faithfulness)
+- May only identify equivalence classes rather than unique DAG
+- Sensitive to sample size and noise
 
 ---
 
@@ -510,9 +533,9 @@ pip install causal-learn
 
 ### For Beginners:
 1. **Start with theory:** Read Brady Neal's "Introduction to Causal Inference" (free online)
-2. **Practice with DoWhy:** Follow DataCamp tutorial on DoWhy
+2. **Practice with DoWhy:** Follow official DoWhy tutorials and documentation
 3. **Take a course:** Coursera's "Crash Course in Causality"
-4. **Experiment:** Apply to simple datasets with known causal structures
+4. **Experiment:** Apply to simple datasets with known causal structures (e.g., Titanic dataset, simulated data)
 
 ### For ML Practitioners:
 1. **Read:** "Causal AI" by Robert Osazuwa Ness
