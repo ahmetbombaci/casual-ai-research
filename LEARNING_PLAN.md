@@ -1,1282 +1,1359 @@
 # Causal AI Learning Plan: 2 Hours Daily
 
-## Overview
+_A Practical, Structured 12-Week Journey from Basics to Mastery_
 
-This structured learning plan is designed for **2 hours of daily study** over **12 weeks** (approximately 3 months). The plan takes you from foundational concepts to practical implementation, with hands-on projects and incremental complexity.
+## 📋 Quick Overview
 
-**Total Time Commitment:** ~168 hours over 84 days
-**Schedule:** 2 hours/day, 6 days/week (1 rest day for review/catch-up)
+**Duration:** 12 weeks (84 days)  
+**Daily Commitment:** 2 hours  
+**Total Time:** ~168 hours  
+**Schedule:** 6 days/week + 1 review day
 
----
+### ⏰ Your Daily 2-Hour Block
 
-## Learning Philosophy
-
-### Daily Session Structure (2 hours)
-- **Theory & Reading (45 min):** Core concepts, reading, watching lectures
-- **Hands-on Practice (60 min):** Coding exercises, implementing examples
-- **Reflection & Notes (15 min):** Summarize learnings, document challenges, plan next session
-
-### Weekly Rhythm
-- **Days 1-5:** New content and practice
-- **Day 6:** Review, consolidation, mini-project work
-- **Day 7:** Rest/optional catch-up
-
----
-
-## Phase 1: Foundations (Weeks 1-3)
-**Goal:** Build intuition about causality and understand core concepts
-
-### Week 1: Introduction to Causal Thinking
-
-#### Day 1: Correlation vs. Causation
-- **Theory (45 min):**
-  - Read: Introduction to Causal Inference (Brady Neal) - Chapter 1
-  - Watch: "Correlation doesn't imply causation" examples
-  - Understand: Simpson's Paradox
-
-- **Practice (60 min):**
-  - Work through Simpson's Paradox examples with real data
-  - Create visualizations showing how correlations can mislead
-  - Dataset: Use UCI Berkeley Admissions data
-
-- **Reflection (15 min):**
-  - Write down 3 examples from your domain where correlation ≠ causation
-  - Note: What makes identifying causation difficult?
-
-#### Day 2: Introduction to DAGs
-- **Theory (45 min):**
-  - Read: Brady Neal Chapter 2 - sections on DAGs
-  - Learn: Nodes, edges, paths, and basic graph concepts
-  - Understand: The difference between statistical and causal models
-
-- **Practice (60 min):**
-  - Install DoWhy: `pip install dowhy`
-  - Draw your first DAGs using networkx
-  - Create 5 simple causal graphs for familiar scenarios
-
-- **Reflection (15 min):**
-  - What makes a good causal graph?
-  - Sketch DAG for a problem you're interested in
-
-#### Day 3: Confounding and Backdoor Paths
-- **Theory (45 min):**
-  - Read: Brady Neal Chapter 2 - confounding section
-  - Understand: Confounders, mediators, colliders
-  - Learn: What is a backdoor path?
-
-- **Practice (60 min):**
-  - Implement examples with confounding in Python
-  - Use simulated data to show how confounders create spurious correlations
-  - Practice identifying confounders in DAGs
-
-- **Reflection (15 min):**
-  - Can you identify confounders in your own work problems?
-  - What happens when you don't adjust for confounders?
-
-#### Day 4: The Backdoor Criterion
-- **Theory (45 min):**
-  - Read: Brady Neal Chapter 2 - backdoor criterion
-  - Understand: How to block backdoor paths
-  - Learn: Valid adjustment sets
-
-- **Practice (60 min):**
-  - Use DoWhy to identify backdoor paths
-  - Practice finding valid adjustment sets
-  - Work through examples with multiple confounders
-
-- **Reflection (15 min):**
-  - How do you know if an adjustment set is valid?
-  - Practice explaining backdoor criterion in your own words
-
-#### Day 5: d-separation and Conditional Independence
-- **Theory (45 min):**
-  - Read: Brady Neal Chapter 2 - d-separation
-  - Understand: Rules of d-separation
-  - Learn: How graph structure implies independence
-
-- **Practice (60 min):**
-  - Implement d-separation tests in Python
-  - Use causal-learn or DoWhy for conditional independence testing
-  - Create complex DAGs and test d-separation
-
-- **Reflection (15 min):**
-  - Why is d-separation important for causal inference?
-  - What are the three patterns that block/unblock paths?
-
-#### Day 6: Week 1 Review & Mini-Project
-- **Review (30 min):**
-  - Revisit difficult concepts from Week 1
-  - Go through your notes and questions
-
-- **Mini-Project (90 min):**
-  - **Project:** Analyze a real-world confounding scenario
-  - Choose dataset (e.g., Titanic, or simple observational study)
-  - Draw the DAG
-  - Identify confounders
-  - Compare naive vs. adjusted estimates
-  - Document findings in a Jupyter notebook
+```
+┌─────────────────────────────────────┐
+│ 0:00-0:15  Warm-up & Review         │
+│ 0:15-0:45  Theory & Concepts        │
+│ 0:45-1:45  Hands-on Practice        │
+│ 1:45-2:00  Reflection & Planning    │
+└─────────────────────────────────────┘
+```
 
 ---
 
-### Week 2: Structural Causal Models and Interventions
+## 🎯 Pre-Learning Setup
 
-#### Day 1: Structural Causal Models (SCMs)
-- **Theory (45 min):**
-  - Read: Brady Neal Chapter 3 - SCMs
-  - Understand: Structural equations
-  - Learn: How SCMs formalize causal relationships
+### Technical Requirements
 
-- **Practice (60 min):**
-  - Define SCMs in Python for simple systems
-  - Simulate data from SCMs
-  - Understand how changing equations changes data distribution
+```bash
+# Create your learning environment
+conda create -n causal-ai python=3.9
+conda activate causal-ai
 
-- **Reflection (15 min):**
-  - How do SCMs differ from statistical models?
-  - Write SCM for a problem you're studying
+# Core installations (Week 0)
+pip install notebook jupyterlab
+pip install numpy pandas matplotlib seaborn
+pip install scikit-learn statsmodels
 
-#### Day 2: Interventions and do-operator
-- **Theory (45 min):**
-  - Read: Brady Neal Chapter 3 - interventions
-  - Understand: Difference between seeing P(Y|X) and doing P(Y|do(X))
-  - Learn: Graph surgery/mutilation
+# Causal libraries (install as needed)
+pip install dowhy  # Week 1
+pip install econml  # Week 5
+pip install causalml  # Week 6
+pip install causal-learn  # Week 8
+```
 
-- **Practice (60 min):**
-  - Implement interventions using DoWhy
-  - Compare observational vs. interventional distributions
-  - Simulate interventions on SCMs
+### Workspace Organization
 
-- **Reflection (15 min):**
-  - Why can't we compute interventions from observations alone?
-  - Give examples where P(Y|X) ≠ P(Y|do(X))
+```
+causal-ai-journey/
+├── 📚 resources/
+│   ├── books/
+│   ├── papers/
+│   └── cheatsheets/
+├── 📝 notes/
+│   ├── daily-logs/
+│   ├── concepts/
+│   └── questions.md
+├── 💻 code/
+│   ├── week-01/
+│   ├── week-02/
+│   └── ...
+├── 🚀 projects/
+│   ├── mini-projects/
+│   └── portfolio/
+└── 📊 progress/
+    ├── tracker.xlsx
+    └── reflections.md
+```
 
-#### Day 3: Introduction to do-calculus
-- **Theory (45 min):**
-  - Read: Brady Neal Chapter 3 - do-calculus introduction
-  - Understand: The three rules at high level
-  - Learn: When we can identify causal effects from observational data
+### Learning Tools Setup
 
-- **Practice (60 min):**
-  - Work through do-calculus examples
-  - Use DoWhy's identify_effect() method
-  - Practice with simple graphs
-
-- **Reflection (15 min):**
-  - What makes a causal effect identifiable?
-  - When do we need experiments vs. observational data?
-
-#### Day 4: Front-door Criterion
-- **Theory (45 min):**
-  - Read: Brady Neal - front-door criterion section
-  - Understand: Alternative to backdoor adjustment
-  - Learn: When front-door is useful
-
-- **Practice (60 min):**
-  - Implement front-door adjustment
-  - Compare with backdoor adjustment
-  - Work through smoking example (cigarettes → tar → cancer)
-
-- **Reflection (15 min):**
-  - When is front-door better than backdoor?
-  - Can you think of scenarios where front-door applies?
-
-#### Day 5: Counterfactuals
-- **Theory (45 min):**
-  - Read: Brady Neal Chapter 4 - counterfactuals
-  - Understand: The three levels of causal hierarchy
-  - Learn: How to compute counterfactuals from SCMs
-
-- **Practice (60 min):**
-  - Implement counterfactual reasoning in DoWhy
-  - Work through examples: "What if I had done X instead?"
-  - Practice on synthetic data
-
-- **Reflection (15 min):**
-  - How are counterfactuals different from interventions?
-  - Why can't counterfactuals always be computed from data?
-
-#### Day 6: Week 2 Review & Mini-Project
-- **Review (30 min):**
-  - Consolidate understanding of SCMs, interventions, do-calculus
-
-- **Mini-Project (90 min):**
-  - **Project:** Build an SCM for a multi-variable system
-  - Define structural equations
-  - Simulate observational data
-  - Perform interventions
-  - Compute counterfactuals
-  - Create visualizations showing differences
-  - Document in Jupyter notebook
+1. **Note-taking:** Obsidian or Notion for concept maps
+2. **Code:** VSCode with Python & Jupyter extensions
+3. **Version Control:** Git repository for all work
+4. **Time Tracking:** Toggl or simple spreadsheet
+5. **Community:** Join PyWhy Discord & r/CausalInference
 
 ---
 
-### Week 3: Potential Outcomes Framework
+## 📅 Phase 1: Foundations (Weeks 1-3)
 
-#### Day 1: Introduction to Potential Outcomes
-- **Theory (45 min):**
-  - Read: Brady Neal Chapter 5 - potential outcomes introduction
-  - Understand: Y(0) and Y(1) notation
-  - Learn: Fundamental problem of causal inference
+_Building Causal Intuition_
 
-- **Practice (60 min):**
-  - Simulate potential outcomes framework
-  - Understand selection bias
-  - Calculate observed vs. true treatment effects
+### 🗓️ Week 1: From Correlation to Causation
 
-- **Reflection (15 min):**
-  - How do potential outcomes relate to SCMs?
-  - Why can we never observe both Y(0) and Y(1) for same unit?
+#### **Day 1 (Monday): The Causality Mindset**
 
-#### Day 2: Treatment Effects (ATE, ATT, CATE)
-- **Theory (45 min):**
-  - Read: Brady Neal Chapter 5 - treatment effects
-  - Understand: ATE, ATT, ATC, CATE, ITE
-  - Learn: When each estimand is appropriate
+**🎯 Learning Objectives:**
 
-- **Practice (60 min):**
-  - Calculate different treatment effects from simulated data
-  - Use CausalML library
-  - Understand heterogeneous treatment effects
+- Distinguish correlation from causation
+- Identify real-world confounding examples
+- Understand Simpson's Paradox
 
-- **Reflection (15 min):**
-  - When would you care about CATE vs. ATE?
-  - How does heterogeneity affect decision-making?
+**📚 Theory (30 min):**
 
-#### Day 3: Assumptions for Identification
-- **Theory (45 min):**
-  - Read: Brady Neal Chapter 5 - assumptions (ignorability, positivity, SUTVA)
-  - Understand: When treatment effects are identifiable
-  - Learn: How assumptions can fail
+1. Read: Brady Neal Ch. 1 Introduction (pages 1-10)
+2. Watch: [Judea Pearl - The Book of Why Talk](https://www.youtube.com/watch?v=ZaPV1OSEpHw) (first 15 min)
 
-- **Practice (60 min):**
-  - Check assumptions in real datasets
-  - Visualize overlap and positivity violations
-  - Test for confounding
+**💻 Practice (60 min):**
 
-- **Reflection (15 min):**
-  - Which assumption is most commonly violated?
-  - How can you test assumptions in practice?
+```python
+# Exercise 1: Simpson's Paradox Visualization
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-#### Day 4: Randomized Experiments vs. Observational Studies
-- **Theory (45 min):**
-  - Read: Brady Neal Chapter 5 - randomization
-  - Understand: Why randomization solves confounding
-  - Learn: Limitations of experiments
+# Load Berkeley admissions data
+# URL: https://raw.githubusercontent.com/wadefagen/datasets/master/berkeley-admissions/data.csv
+data = pd.read_csv('berkeley_admissions.csv')
 
-- **Practice (60 min):**
-  - Simulate RCT vs. observational study
-  - Show how randomization achieves balance
-  - Compare estimates under both scenarios
+# Task 1: Show overall admission rates by gender
+# Task 2: Show department-specific rates
+# Task 3: Explain the paradox
 
-- **Reflection (15 min):**
-  - When are experiments not feasible?
-  - What can go wrong even in randomized trials?
+# Your code here...
+```
 
-#### Day 5: Connecting DAGs and Potential Outcomes
-- **Theory (45 min):**
-  - Read: Brady Neal Chapter 5 - connection to DAGs
-  - Understand: Two frameworks are complementary
-  - Learn: When to use each framework
+**📊 Mini-Challenge:**
+Find 3 examples of correlation ≠ causation in news headlines today
 
-- **Practice (60 min):**
-  - Express potential outcomes assumptions as DAGs
-  - Express DAG assumptions in potential outcomes notation
-  - Work through examples in both frameworks
+**✍️ Reflection Questions:**
 
-- **Reflection (15 min):**
-  - What are strengths of each framework?
-  - When might you prefer one over the other?
+1. Why is causal inference hard?
+2. What confounders exist in my domain?
+3. How would I explain Simpson's Paradox to a colleague?
 
-#### Day 6: Week 3 Review & Phase 1 Project
-- **Review (30 min):**
-  - Consolidate all Phase 1 concepts
-  - Review your notes from weeks 1-3
-
-- **Phase 1 Project (90 min):**
-  - **Project:** Comprehensive causal analysis
-  - Choose an interesting observational dataset
-  - Draw the causal DAG based on domain knowledge
-  - Formulate causal question
-  - State assumptions (identify confounders)
-  - Estimate treatment effect using multiple methods
-  - Discuss limitations and violations
-  - Create presentation-ready notebook
+**📝 Deliverable:**
+Create a notebook demonstrating Simpson's Paradox with visualizations
 
 ---
 
-## Phase 2: Estimation Methods (Weeks 4-6)
-**Goal:** Learn practical methods for estimating causal effects
+#### **Day 2 (Tuesday): Introduction to DAGs**
 
-### Week 4: Basic Estimation Methods
+**🎯 Learning Objectives:**
 
-#### Day 1: Regression for Causal Inference
-- **Theory (45 min):**
-  - Read: Brady Neal Chapter 6 - regression adjustment
-  - Understand: When regression gives causal effects
-  - Learn: Limitations of regression
+- Draw causal diagrams
+- Identify causal paths
+- Use NetworkX for DAG visualization
 
-- **Practice (60 min):**
-  - Implement regression adjustment in Python
-  - Compare with and without proper adjustment
-  - Identify when regression fails (non-linearity, misspecification)
+**📚 Theory (30 min):**
 
-- **Reflection (15 min):**
-  - Why isn't regression always enough?
-  - What assumptions does regression make?
+1. Read: Pearl's "Causal Inference in Statistics" - Chapter 1
+2. Study: DAG notation and terminology
 
-#### Day 2: Matching Methods
-- **Theory (45 min):**
-  - Read: Causal Inference What If - Chapter on matching
-  - Understand: Exact matching, coarsened exact matching
-  - Learn: When matching is appropriate
+**💻 Practice (60 min):**
 
-- **Practice (60 min):**
-  - Implement exact matching using Python
-  - Use libraries: CausalML or DoWhy
-  - Compare matched vs. unmatched estimates
+```python
+# Exercise 2: Your First DAGs
+import networkx as nx
+import matplotlib.pyplot as plt
+from dowhy import gcm
 
-- **Reflection (15 min):**
-  - What are limitations of exact matching?
-  - How do you handle continuous confounders?
+# Create DAGs for these scenarios:
+# 1. Ice cream sales → Swimming pool drownings (with temperature as confounder)
+# 2. Education → Income (with ability as confounder)
+# 3. Smoking → Lung cancer (with genetics as confounder)
 
-#### Day 3: Propensity Score Basics
-- **Theory (45 min):**
-  - Read: Brady Neal Chapter 7 - propensity scores
-  - Understand: What is propensity score
-  - Learn: Balancing property
+def create_and_visualize_dag(edges, title):
+    G = nx.DiGraph()
+    G.add_edges_from(edges)
 
-- **Practice (60 min):**
-  - Estimate propensity scores using logistic regression
-  - Visualize propensity score distributions
-  - Check balance before/after adjustment
+    pos = nx.spring_layout(G)
+    plt.figure(figsize=(8, 6))
+    nx.draw(G, pos, with_labels=True,
+            node_color='lightblue',
+            node_size=1500,
+            font_size=10,
+            arrows=True)
+    plt.title(title)
+    return G
 
-- **Reflection (15 min):**
-  - Why does propensity score work?
-  - What information is lost when using propensity scores?
+# Example:
+edges = [('Temperature', 'Ice_Cream_Sales'),
+         ('Temperature', 'Drownings')]
+dag1 = create_and_visualize_dag(edges, 'Ice Cream and Drownings')
+```
 
-#### Day 4: Propensity Score Matching
-- **Theory (45 min):**
-  - Read: Brady Neal Chapter 7 - PS matching
-  - Understand: Nearest neighbor, caliper matching
-  - Learn: How to check balance
+**📊 Mini-Challenge:**
+Draw DAG for: "Does working from home increase productivity?"
 
-- **Practice (60 min):**
-  - Implement PS matching using CausalML
-  - Try different matching algorithms
-  - Assess covariate balance using standardized differences
+**✍️ Reflection:**
 
-- **Reflection (15 min):**
-  - How do you choose matching parameters?
-  - What to do with unmatched units?
-
-#### Day 5: Inverse Probability Weighting (IPW)
-- **Theory (45 min):**
-  - Read: Brady Neal Chapter 7 - IPW
-  - Understand: How weighting creates pseudo-population
-  - Learn: Stabilized weights
-
-- **Practice (60 min):**
-  - Implement IPW estimator
-  - Compare IPW with matching
-  - Visualize how weights work
-
-- **Reflection (15 min):**
-  - When might IPW be preferred over matching?
-  - What problems can arise with extreme weights?
-
-#### Day 6: Week 4 Review & Comparison Project
-- **Review (30 min):**
-  - Compare all estimation methods learned
-
-- **Mini-Project (90 min):**
-  - **Project:** Method comparison study
-  - Use a benchmark dataset (e.g., Lalonde dataset)
-  - Apply all methods: regression, matching, PS matching, IPW
-  - Compare estimates and standard errors
-  - Discuss which method works best and why
-  - Document trade-offs
+- What makes a good causal diagram?
+- How do I know if my DAG is complete?
 
 ---
 
-### Week 5: Advanced Estimation Methods
+#### **Day 3 (Wednesday): Confounders, Mediators, and Colliders**
 
-#### Day 1: Doubly Robust Methods
-- **Theory (45 min):**
-  - Read: Brady Neal Chapter 7 - doubly robust estimation
-  - Understand: Why "doubly robust"
-  - Learn: AIPW (Augmented IPW)
+**🎯 Learning Objectives:**
 
-- **Practice (60 min):**
-  - Implement AIPW using EconML
-  - Compare with IPW and regression
-  - Show double robustness property
+- Identify three basic DAG patterns
+- Understand when to control for variables
+- Recognize collider bias
 
-- **Reflection (15 min):**
-  - Why is double robustness desirable?
-  - What are computational trade-offs?
+**📚 Theory (30 min):**
 
-#### Day 2: Instrumental Variables - Part 1
-- **Theory (45 min):**
-  - Read: Brady Neal Chapter 8 - IV basics
-  - Understand: What is an instrument
-  - Learn: Three IV assumptions
+1. Read: Brady Neal Ch. 2 - "Graphical Causal Models"
+2. Watch: "Confounders, Mediators, and Colliders" video
 
-- **Practice (60 min):**
-  - Work through classic IV examples (returns to education)
-  - Implement 2SLS regression
-  - Test instrument strength
+**💻 Practice (60 min):**
 
-- **Reflection (15 min):**
-  - Why are good instruments hard to find?
-  - How do you validate IV assumptions?
+```python
+# Exercise 3: Identifying Causal Patterns
+import numpy as np
+import pandas as pd
 
-#### Day 3: Instrumental Variables - Part 2
-- **Theory (45 min):**
-  - Read: Brady Neal Chapter 8 - LATE and IV interpretation
-  - Understand: Local Average Treatment Effect
-  - Learn: Compliers, never-takers, always-takers
+# Generate data for each pattern
+np.random.seed(42)
+n = 1000
 
-- **Practice (60 min):**
-  - Implement IV using DoWhy and EconML
-  - Work through weak instrument scenarios
-  - Calculate LATE
+# Pattern 1: Confounder
+# Z → X, Z → Y, X → Y
+Z = np.random.normal(0, 1, n)  # Confounder
+X = 2 * Z + np.random.normal(0, 1, n)  # Treatment
+Y = 3 * X + 2 * Z + np.random.normal(0, 1, n)  # Outcome
 
-- **Reflection (15 min):**
-  - How does LATE differ from ATE?
-  - When can IV identification fail?
+df_confound = pd.DataFrame({'X': X, 'Y': Y, 'Z': Z})
 
-#### Day 4: Difference-in-Differences - Part 1
-- **Theory (45 min):**
-  - Read: Causal Inference What If - DiD chapter
-  - Understand: Parallel trends assumption
-  - Learn: When DiD is applicable
+# Task: Show spurious correlation without controlling for Z
+# Then show true effect after controlling
 
-- **Practice (60 min):**
-  - Implement basic DiD estimator
-  - Visualize parallel trends
-  - Use panel data example
+# Pattern 2: Mediator
+# X → M → Y
+X = np.random.normal(0, 1, n)
+M = 2 * X + np.random.normal(0, 1, n)  # Mediator
+Y = 3 * M + np.random.normal(0, 1, n)
 
-- **Reflection (15 min):**
-  - How do you test parallel trends?
-  - What violates parallel trends assumption?
+# Task: Show total effect vs direct effect
 
-#### Day 5: Difference-in-Differences - Part 2
-- **Theory (45 min):**
-  - Read: Recent DiD developments (staggered adoption, heterogeneous effects)
-  - Understand: Issues with TWFE in staggered settings
-  - Learn: Modern DiD estimators
+# Pattern 3: Collider
+# X → Z ← Y
+X = np.random.normal(0, 1, n)
+Y = np.random.normal(0, 1, n)
+Z = X + Y + np.random.normal(0, 0.1, n)  # Collider
 
-- **Practice (60 min):**
-  - Implement DiD with multiple time periods
-  - Try event study designs
-  - Use DoWhy or custom implementation
+# Task: Show no correlation between X and Y
+# Then show spurious correlation when conditioning on Z
+```
 
-- **Reflection (15 min):**
-  - Why has DiD research evolved recently?
-  - When is classic DiD not enough?
-
-#### Day 6: Week 5 Review & Application Project
-- **Review (30 min):**
-  - Review advanced methods
-
-- **Mini-Project (90 min):**
-  - **Project:** Panel data causal analysis
-  - Find panel dataset with policy change
-  - Implement DiD estimation
-  - Check parallel trends
-  - Perform robustness checks
-  - Create publication-quality plots
+**📊 Mini-Challenge:**
+Find example of collider bias in real research (hint: survivorship bias)
 
 ---
 
-### Week 6: Heterogeneous Treatment Effects
+#### **Day 4 (Thursday): The Backdoor Criterion**
 
-#### Day 1: Introduction to Treatment Heterogeneity
-- **Theory (45 min):**
-  - Read: EconML documentation on CATE
-  - Understand: Why heterogeneity matters
-  - Learn: Individual vs. average effects
+**🎯 Learning Objectives:**
 
-- **Practice (60 min):**
-  - Explore heterogeneous effects in simulated data
-  - Visualize treatment effects across subgroups
-  - Understand conditional average treatment effects
+- Apply backdoor criterion
+- Find adjustment sets
+- Use DoWhy for identification
 
-- **Reflection (15 min):**
-  - Why is CATE important for personalization?
-  - When might average effects be misleading?
+**📚 Theory (30 min):**
 
-#### Day 2: Meta-Learners (S, T, X-learner)
-- **Theory (45 min):**
-  - Read: CausalML documentation on meta-learners
-  - Understand: Different meta-learner approaches
-  - Learn: When to use each
+1. Read: Brady Neal Ch. 2 - "Backdoor Criterion"
+2. Understand: Blocking backdoor paths
 
-- **Practice (60 min):**
-  - Implement S-learner, T-learner, X-learner using CausalML
-  - Compare performance on benchmark data
-  - Visualize CATE estimates
+**💻 Practice (60 min):**
 
-- **Reflection (15 min):**
-  - What are trade-offs between meta-learners?
-  - Which works best in different scenarios?
+```python
+# Exercise 4: Finding Adjustment Sets
+from dowhy import CausalModel
 
-#### Day 3: Causal Forests
-- **Theory (45 min):**
-  - Read: EconML documentation on causal forests
-  - Understand: How causal trees differ from prediction trees
-  - Learn: Honest splitting
+# Complex DAG scenario
+causal_graph = """
+    digraph {
+        U1[label="Unobserved"];
+        U2[label="Unobserved"];
 
-- **Practice (60 min):**
-  - Implement causal forests using EconML
-  - Compare with meta-learners
-  - Interpret forest-based CATE estimates
+        Age -> Income;
+        Age -> Health;
+        Education -> Income;
+        Exercise -> Health;
+        Income -> Health;
+        Genetics -> Health;
+        Genetics -> Exercise;
+        U1 -> Income;
+        U1 -> Health;
+        U2 -> Exercise;
+        U2 -> Health;
+    }
+"""
 
-- **Reflection (15 min):**
-  - Why are causal forests powerful?
-  - What are computational considerations?
+# Task 1: Find all backdoor paths from Exercise to Health
+# Task 2: Identify minimal adjustment set
+# Task 3: Use DoWhy to verify
 
-#### Day 4: Double Machine Learning (DML)
-- **Theory (45 min):**
-  - Read: EconML documentation on DML
-  - Understand: Debiased machine learning
-  - Learn: Orthogonalization and cross-fitting
+model = CausalModel(
+    data=your_data,
+    treatment='Exercise',
+    outcome='Health',
+    graph=causal_graph
+)
 
-- **Practice (60 min):**
-  - Implement DML using EconML
-  - Use different ML models (random forests, gradient boosting)
-  - Compare with traditional methods
-
-- **Reflection (15 min):**
-  - Why is debiasing necessary?
-  - How does DML handle high-dimensional confounders?
-
-#### Day 5: Uplift Modeling
-- **Theory (45 min):**
-  - Read: CausalML book chapters on uplift
-  - Understand: Targeting based on treatment effects
-  - Learn: Uplift curves and evaluation
-
-- **Practice (60 min):**
-  - Implement uplift models using CausalML
-  - Evaluate using uplift curves
-  - Apply to marketing-style dataset
-
-- **Reflection (15 min):**
-  - How is uplift modeling used in industry?
-  - What makes uplift evaluation challenging?
-
-#### Day 6: Week 6 Review & Phase 2 Project
-- **Review (30 min):**
-  - Consolidate all estimation methods
-
-- **Phase 2 Project (90 min):**
-  - **Project:** Complete heterogeneous treatment effect analysis
-  - Use dataset with rich covariates
-  - Estimate CATE using multiple methods
-  - Compare method performance
-  - Identify most responsive subgroups
-  - Create policy recommendations
-  - Professional notebook with visualizations
+# Identify effect
+identified = model.identify_effect()
+print(identified)
+```
 
 ---
 
-## Phase 3: Causal Discovery & Advanced Topics (Weeks 7-9)
-**Goal:** Learn how to discover causal structure and explore advanced applications
+#### **Day 5 (Friday): d-Separation and Independence**
 
-### Week 7: Causal Discovery
+**🎯 Learning Objectives:**
 
-#### Day 1: Introduction to Causal Discovery
-- **Theory (45 min):**
-  - Read: causal-learn documentation and tutorials
-  - Understand: Can we learn causal structure from data?
-  - Learn: Key assumptions (causal sufficiency, faithfulness)
+- Master d-separation rules
+- Test conditional independence
+- Connect graphs to probability
 
-- **Practice (60 min):**
-  - Install causal-learn and gcastle
-  - Run simple discovery examples
-  - Visualize learned graphs
+**📚 Theory (30 min):**
 
-- **Reflection (15 min):**
-  - What makes causal discovery hard?
-  - When is structure learning useful?
+1. Read: "d-separation without tears"
+2. Practice: d-separation exercises
 
-#### Day 2: Constraint-Based Methods (PC Algorithm)
-- **Theory (45 min):**
-  - Read: Papers/tutorials on PC algorithm
-  - Understand: Conditional independence testing
-  - Learn: How PC builds graphs incrementally
+**💻 Practice (60 min):**
 
-- **Practice (60 min):**
-  - Implement PC algorithm using causal-learn
-  - Test on known ground-truth graphs
-  - Understand equivalence classes (CPDAGs)
+```python
+# Exercise 5: d-Separation Testing
+from causallearn.utils.cit import fisherz
+from causallearn.utils.GraphUtils import GraphUtils
 
-- **Reflection (15 min):**
-  - Why can't PC always identify unique DAG?
-  - How does sample size affect discovery?
+# Create test data
+def test_dseparation(dag, data, X, Y, Z_set):
+    """
+    Test if X and Y are d-separated given Z_set
+    """
+    # Statistical independence test
+    p_value = fisherz(data, X, Y, Z_set)
 
-#### Day 3: Score-Based Methods
-- **Theory (45 min):**
-  - Read: Tutorials on GES, NOTEARS
-  - Understand: Scoring functions and search
-  - Learn: Continuous optimization for DAGs
+    # Graph-based d-separation check
+    is_dsep = dag.is_dseparated(X, Y, Z_set)
 
-- **Practice (60 min):**
-  - Implement score-based discovery using gcastle
-  - Compare PC with score-based methods
-  - Try NOTEARS algorithm
+    return {
+        'statistical_independent': p_value > 0.05,
+        'graphically_dseparated': is_dsep,
+        'p_value': p_value
+    }
 
-- **Reflection (15 min):**
-  - What are advantages of score-based vs. constraint-based?
-  - How do you choose between methods?
-
-#### Day 4: Functional Causal Models (LiNGAM)
-- **Theory (45 min):**
-  - Read: LiNGAM documentation and papers
-  - Understand: How non-Gaussianity enables identification
-  - Learn: When can we identify unique DAG
-
-- **Practice (60 min):**
-  - Implement LiNGAM using causal-learn
-  - Test on linear non-Gaussian data
-  - Compare with other discovery methods
-
-- **Reflection (15 min):**
-  - Why does non-Gaussianity help?
-  - What happens with Gaussian noise?
-
-#### Day 5: Time Series Causal Discovery
-- **Theory (45 min):**
-  - Read: Time series causality literature
-  - Understand: Granger causality vs. true causality
-  - Learn: Temporal ordering constraints
-
-- **Practice (60 min):**
-  - Apply causal discovery to time series data
-  - Use PCMCI or similar algorithms
-  - Visualize temporal graphs
-
-- **Reflection (15 min):**
-  - How does time help with causal discovery?
-  - What unique challenges arise in time series?
-
-#### Day 6: Week 7 Review & Discovery Project
-- **Review (30 min):**
-  - Compare different discovery algorithms
-
-- **Mini-Project (90 min):**
-  - **Project:** Causal structure learning
-  - Choose dataset without known causal graph
-  - Apply multiple discovery algorithms
-  - Compare learned structures
-  - Validate using domain knowledge
-  - Discuss uncertainty and limitations
+# Test cases:
+# 1. Chain: A → B → C (A ⊥ C | B?)
+# 2. Fork: A ← B → C (A ⊥ C | B?)
+# 3. Collider: A → B ← C (A ⊥ C | B?)
+```
 
 ---
 
-### Week 8: Sensitivity Analysis and Robustness
+#### **Day 6 (Saturday): Week 1 Review & Integration**
 
-#### Day 1: Introduction to Sensitivity Analysis
-- **Theory (45 min):**
-  - Read: DoWhy refutation documentation
-  - Understand: Why sensitivity analysis matters
-  - Learn: Types of sensitivity tests
+**🎯 Objectives:**
 
-- **Practice (60 min):**
-  - Use DoWhy's refutation methods
-  - Test sensitivity to unobserved confounding
-  - Run placebo tests
+- Consolidate week's learning
+- Complete mini-project
+- Plan Week 2
 
-- **Reflection (15 min):**
-  - How sensitive are typical analyses?
-  - What makes results robust?
+**📚 Review (30 min):**
 
-#### Day 2: Refutation Methods
-- **Theory (45 min):**
-  - Read: DoWhy paper on refutation
-  - Understand: Different refutation strategies
-  - Learn: Random common cause, subset refutation
+- Revisit key concepts
+- Review your notes
+- List questions
 
-- **Practice (60 min):**
-  - Implement all DoWhy refutation methods
-  - Apply to previous analyses
-  - Interpret refutation results
+**💻 Mini-Project (90 min):**
 
-- **Reflection (15 min):**
-  - Which refutations are most informative?
-  - How do you report sensitivity?
+**Project: "Causal Analysis of Employee Satisfaction"**
 
-#### Day 3: Bounds and Partial Identification
-- **Theory (45 min):**
-  - Read: Literature on partial identification
-  - Understand: Bounds under violations
-  - Learn: When point identification isn't possible
+Dataset: HR Analytics (simulated or Kaggle)
 
-- **Practice (60 min):**
-  - Calculate bounds on treatment effects
-  - Implement sensitivity analysis formulas
-  - Visualize how bounds change with assumptions
+Tasks:
 
-- **Reflection (15 min):**
-  - Are bounds useful in practice?
-  - How wide are bounds typically?
+1. Draw complete causal diagram
+2. Identify all confounders for: Training → Performance
+3. Show Simpson's Paradox in the data
+4. Test d-separation assumptions
+5. Find valid adjustment sets
+6. Create presentation notebook
 
-#### Day 4: Falsification Tests
-- **Theory (45 min):**
-  - Read: Literature on falsification
-  - Understand: Testing assumptions
-  - Learn: Negative controls, placebo tests
+**Deliverable Structure:**
 
-- **Practice (60 min):**
-  - Implement falsification tests
-  - Use negative outcome controls
-  - Test parallel trends in DiD
+```markdown
+# Employee Satisfaction Causal Analysis
 
-- **Reflection (15 min):**
-  - What assumptions can be tested?
-  - What assumptions are untestable?
+## 1. Business Problem
 
-#### Day 5: Multiple Testing and Specification Curves
-- **Theory (45 min):**
-  - Read: Specification curve analysis papers
-  - Understand: Researcher degrees of freedom
-  - Learn: How to show robustness across specifications
+[Define the causal question]
 
-- **Practice (60 min):**
-  - Create specification curves
-  - Test multiple model specifications
-  - Visualize robustness
+## 2. Causal Model
 
-- **Reflection (15 min):**
-  - How do you avoid p-hacking?
-  - What makes evidence convincing?
+[Draw and justify your DAG]
 
-#### Day 6: Week 8 Review & Robustness Project
-- **Review (30 min):**
-  - Review all robustness techniques
+## 3. Confounding Analysis
 
-- **Mini-Project (90 min):**
-  - **Project:** Comprehensive sensitivity analysis
-  - Take previous causal analysis
-  - Apply all sensitivity methods
-  - Create robustness dashboard
-  - Write up findings with uncertainty quantification
+[Identify and explain confounders]
+
+## 4. Statistical Tests
+
+[Show correlations vs causal effects]
+
+## 5. Recommendations
+
+[What interventions would you suggest?]
+```
 
 ---
 
-### Week 9: Advanced Applications
+### 🗓️ Week 2: Causal Models and Interventions
 
-#### Day 1: Causal Inference with Text Data
-- **Theory (45 min):**
-  - Read: Papers on text-based causal inference
-  - Understand: Using text as treatment or confounder
-  - Learn: Text embeddings for causal analysis
+#### **Day 7 (Monday): Structural Causal Models**
 
-- **Practice (60 min):**
-  - Work with text data in causal framework
-  - Use embeddings as confounders
-  - Estimate treatment effects with text
+**🎯 Learning Objectives:**
 
-- **Reflection (15 min):**
-  - How does text add complexity?
-  - What assumptions are needed?
+- Define SCMs mathematically
+- Simulate data from SCMs
+- Understand structural equations
 
-#### Day 2: Causal Inference with Images
-- **Theory (45 min):**
-  - Read: Computer vision + causality papers
-  - Understand: Images in causal graphs
-  - Learn: Representation learning for causality
+**📚 Theory (30 min):**
 
-- **Practice (60 min):**
-  - Use image features in causal analysis
-  - Extract representations from pre-trained models
-  - Estimate effects with image data
+1. Read: Brady Neal Ch. 3 - "The Flow of Association and Causation"
+2. Study: SCM = {Variables, Equations, Noise}
 
-- **Reflection (15 min):**
-  - When are images useful for causal inference?
-  - What unique challenges arise?
+**💻 Practice (60 min):**
 
-#### Day 3: Fairness and Causal Inference
-- **Theory (45 min):**
-  - Read: Papers on counterfactual fairness
-  - Understand: Path-specific effects
-  - Learn: Fair machine learning through causality
+```python
+# Exercise 6: Building Your First SCM
+class StructuralCausalModel:
+    def __init__(self, equations, noise_models):
+        self.equations = equations
+        self.noise_models = noise_models
 
-- **Practice (60 min):**
-  - Implement counterfactual fairness
-  - Decompose effects through different paths
-  - Apply to COMPAS or similar dataset
+    def generate_data(self, n_samples=1000):
+        # Generate noise
+        noise = {var: model(n_samples)
+                for var, model in self.noise_models.items()}
 
-- **Reflection (15 min):**
-  - How does causality help with fairness?
-  - What are limitations?
+        # Compute variables using structural equations
+        data = {}
+        # Topological ordering important!
 
-#### Day 4: Causal Reinforcement Learning - Part 1
-- **Theory (45 min):**
-  - Read: Introduction to causal RL
-  - Understand: How causality improves RL
-  - Learn: Causal models of environments
+        return pd.DataFrame(data)
 
-- **Practice (60 min):**
-  - Work through causal RL tutorials
-  - Implement simple causal RL example
-  - Compare with standard RL
+    def intervene(self, do_dict):
+        # Modify equations based on intervention
+        pass
 
-- **Reflection (15 min):**
-  - Why is causality important for RL?
-  - What problems does it solve?
+# Example: Job Market SCM
+def create_job_market_scm():
+    equations = {
+        'ability': lambda n: n['u_ability'],
+        'education': lambda n: 0.7 * data['ability'] + n['u_education'],
+        'job_quality': lambda n: 0.5 * data['education'] + 0.3 * data['ability'] + n['u_job'],
+        'income': lambda n: 1000 * data['job_quality'] + 500 * data['education'] + n['u_income']
+    }
 
-#### Day 5: Causal Reinforcement Learning - Part 2
-- **Theory (45 min):**
-  - Read: Advanced causal RL topics
-  - Understand: Counterfactual reasoning in RL
-  - Learn: Applications to safe AI
+    noise_models = {
+        'u_ability': lambda n: np.random.normal(0, 1, n),
+        'u_education': lambda n: np.random.normal(0, 0.5, n),
+        'u_job': lambda n: np.random.normal(0, 0.3, n),
+        'u_income': lambda n: np.random.normal(0, 200, n)
+    }
 
-- **Practice (60 min):**
-  - Implement counterfactual planning
-  - Work with environments with known causal structure
-  - Explore recent research implementations
-
-- **Reflection (15 min):**
-  - How mature is causal RL?
-  - What are open problems?
-
-#### Day 6: Week 9 Review & Phase 3 Project
-- **Review (30 min):**
-  - Review advanced topics
-
-- **Phase 3 Project (90 min):**
-  - **Project:** Choose advanced application
-  - Options: text-based causal analysis, fairness study, or causal RL
-  - Implement complete pipeline
-  - Compare with non-causal baseline
-  - Document unique challenges
-  - Present findings
+    return StructuralCausalModel(equations, noise_models)
+```
 
 ---
 
-## Phase 4: Real-World Applications & Mastery (Weeks 10-12)
-**Goal:** Apply causal inference to real problems and develop portfolio projects
+#### **Day 8 (Tuesday): Interventions and do-operator**
 
-### Week 10: Industry Applications Deep Dive
+**🎯 Learning Objectives:**
 
-#### Day 1: Marketing and A/B Testing
-- **Theory (45 min):**
-  - Read: Case studies on uplift modeling in marketing
-  - Understand: Beyond average treatment effects
-  - Learn: Targeting and personalization
+- Distinguish P(Y|X) from P(Y|do(X))
+- Perform graph surgery
+- Simulate interventions
 
-- **Practice (60 min):**
-  - Analyze marketing campaign data
-  - Implement uplift-based targeting
-  - Calculate ROI improvements
+**📚 Theory (30 min):**
 
-- **Reflection (15 min):**
-  - How does causal thinking improve marketing?
-  - What are business implications?
+1. Read: "The do-operator explained"
+2. Understand: Why conditioning ≠ intervening
 
-#### Day 2: Healthcare and Medicine
-- **Theory (45 min):**
-  - Read: Medical causal inference case studies
-  - Understand: Treatment effect heterogeneity in medicine
-  - Learn: Personalized medicine approaches
+**💻 Practice (60 min):**
 
-- **Practice (60 min):**
-  - Analyze clinical dataset
-  - Estimate heterogeneous treatment effects
-  - Identify patient subgroups
+```python
+# Exercise 7: Interventions vs Observations
+import dowhy.gcm as gcm
 
-- **Reflection (15 min):**
-  - What makes medical causal inference challenging?
-  - How do you handle safety considerations?
+# Build causal model
+causal_model = gcm.StructuralCausalModel(graph)
 
-#### Day 3: Economics and Policy Evaluation
-- **Theory (45 min):**
-  - Read: Policy evaluation case studies
-  - Understand: Program evaluation frameworks
-  - Learn: Cost-benefit analysis with causal effects
+# Observational: P(Y|X=x)
+observational = data[data['X'] == x]['Y'].mean()
 
-- **Practice (60 min):**
-  - Analyze policy intervention data
-  - Estimate policy impact
-  - Make recommendations
+# Interventional: P(Y|do(X=x))
+# Method 1: Graph surgery
+def graph_surgery(scm, intervention):
+    modified_scm = scm.copy()
+    # Remove incoming edges to intervened variables
+    # Set variable to intervention value
+    return modified_scm
 
-- **Reflection (15 min):**
-  - How does causal inference inform policy?
-  - What are ethical considerations?
+# Method 2: Using DoWhy
+samples = gcm.interventional_samples(
+    causal_model,
+    interventions={'X': lambda: x},
+    num_samples=1000
+)
+interventional = samples['Y'].mean()
 
-#### Day 4: Tech and Product Analytics
-- **Theory (45 min):**
-  - Read: Tech company case studies (Uber, Netflix, etc.)
-  - Understand: Product experimentation at scale
-  - Learn: Network effects and interference
-
-- **Practice (60 min):**
-  - Analyze product feature impact
-  - Handle interference in social networks
-  - Estimate network effects
-
-- **Reflection (15 min):**
-  - What unique challenges arise in tech?
-  - How do you scale causal inference?
-
-#### Day 5: Finance and Econometrics
-- **Theory (45 min):**
-  - Read: Financial econometrics applications
-  - Understand: Event studies, market impacts
-  - Learn: Synthetic control for financial data
-
-- **Practice (60 min):**
-  - Analyze financial event impact
-  - Use synthetic control methods
-  - Handle time-series complications
-
-- **Reflection (15 min):**
-  - How does causal inference apply to finance?
-  - What assumptions are most critical?
-
-#### Day 6: Week 10 Review & Application Comparison
-- **Review (30 min):**
-  - Compare methods across domains
-
-- **Exercise (90 min):**
-  - **Task:** Create cross-domain comparison document
-  - Summarize methods used in each industry
-  - Identify common patterns
-  - Note domain-specific challenges
-  - Create reference guide for future use
+print(f"P(Y|X={x}): {observational}")
+print(f"P(Y|do(X={x})): {interventional}")
+print(f"Confounding bias: {observational - interventional}")
+```
 
 ---
 
-### Week 11: Portfolio Project 1
+#### **Day 9 (Wednesday): Introduction to do-calculus**
 
-#### Days 1-5: Major Project Development
-**Choose one significant project (2 hours/day × 5 days = 10 hours total)**
+**🎯 Learning Objectives:**
 
-**Project Options:**
+- Understand three rules of do-calculus
+- Apply rules to simple graphs
+- Check identifiability
 
-**Option A: End-to-End Marketing Campaign Analysis**
-- Objective: Optimize marketing spend using causal inference
-- Dataset: Kaggle marketing dataset or simulate realistic scenario
-- Tasks:
-  - Estimate treatment effects of different marketing channels
-  - Identify customer segments with highest uplift
-  - Build targeting model
-  - Calculate ROI improvements
-  - Create business presentation
-  - Write technical report
+**📚 Theory (30 min):**
 
-**Option B: Healthcare Treatment Personalization**
-- Objective: Identify which patients benefit most from treatment
-- Dataset: Medical dataset (MIMIC-III, or public clinical trial)
-- Tasks:
-  - Estimate heterogeneous treatment effects
-  - Identify patient subgroups
-  - Validate using clinical knowledge
-  - Address ethical considerations
-  - Create visualization dashboard
-  - Write clinical-style report
+1. Read: Pearl's do-calculus rules
+2. Study: When causal effects are identifiable
 
-**Option C: Policy Impact Evaluation**
-- Objective: Assess impact of policy intervention
-- Dataset: Find policy change with panel data
-- Tasks:
-  - Apply DiD or synthetic control
-  - Test assumptions rigorously
-  - Perform sensitivity analysis
-  - Create policy brief
-  - Visualize results for non-technical audience
-  - Write policy recommendation
+**💻 Practice (60 min):**
 
-**Option D: Causal Discovery in Domain of Interest**
-- Objective: Learn causal structure from observational data
-- Dataset: Choose from your field
-- Tasks:
-  - Apply multiple discovery algorithms
-  - Validate with domain expertise
-  - Perform sensitivity analysis
-  - Compare with literature
-  - Create interactive visualization
-  - Write research paper style report
+```python
+# Exercise 8: Applying do-calculus Rules
+from dowhy.causal_identifier import CausalIdentifier
 
-**Project Requirements:**
-- Complete analysis pipeline
-- Rigorous assumption checking
+# Rule 1: Insertion/deletion of observations
+# P(Y|do(X), Z, W) = P(Y|do(X), W) if Y ⊥ Z | X, W in G_X̅
+
+# Rule 2: Action/observation exchange
+# P(Y|do(X), do(Z), W) = P(Y|do(X), Z, W) if Y ⊥ Z | X, W in G_X̅Z̲
+
+# Rule 3: Insertion/deletion of actions
+# P(Y|do(X), do(Z), W) = P(Y|do(X), W) if Y ⊥ Z | X, W in G_X̅Z(W)
+
+def check_identifiability(graph, treatment, outcome):
+    """
+    Check if causal effect is identifiable
+    """
+    model = CausalModel(graph=graph)
+    identifier = CausalIdentifier(model, treatment, outcome)
+
+    try:
+        estimand = identifier.identify_effect()
+        return True, estimand
+    except:
+        return False, None
+
+# Test on various graphs
+graphs = {
+    'confounded': "X←Z→Y, X→Y",
+    'instrumental': "Z→X→Y, U→X, U→Y",
+    'frontdoor': "X→M→Y, U→X, U→Y"
+}
+
+for name, graph in graphs.items():
+    identifiable, estimand = check_identifiability(graph, 'X', 'Y')
+    print(f"{name}: Identifiable = {identifiable}")
+    if identifiable:
+        print(f"Estimand: {estimand}")
+```
+
+---
+
+#### **Day 10 (Thursday): Front-door Criterion**
+
+**🎯 Learning Objectives:**
+
+- Apply front-door adjustment
+- Understand when it's needed
+- Compare with backdoor
+
+**📚 Theory (30 min):**
+
+1. Read: Front-door criterion explanation
+2. Study: Classic smoking → cancer example
+
+**💻 Practice (60 min):**
+
+```python
+# Exercise 9: Front-door Adjustment Implementation
+def frontdoor_adjustment(data, X, M, Y):
+    """
+    Implement front-door adjustment
+    P(Y|do(X)) = ΣₘP(M=m|X)ΣₓP(Y|M=m,X=x)P(X=x)
+    """
+    # Step 1: P(M|X)
+    p_m_given_x = data.groupby([X, M]).size() / data.groupby(X).size()
+
+    # Step 2: P(Y|M,X)
+    p_y_given_mx = data.groupby([M, X])[Y].mean()
+
+    # Step 3: P(X)
+    p_x = data[X].value_counts(normalize=True)
+
+    # Combine
+    effect = 0
+    for m_val in data[M].unique():
+        for x_val in data[X].unique():
+            effect += (p_m_given_x[1, m_val] - p_m_given_x[0, m_val]) * \
+                     p_y_given_mx[m_val, x_val] * p_x[x_val]
+
+    return effect
+
+# Simulate smoking → tar → cancer with hidden confounder
+np.random.seed(42)
+n = 10000
+
+# Hidden confounder (genetics)
+genetics = np.random.binomial(1, 0.3, n)
+
+# Smoking (affected by genetics)
+smoking = np.random.binomial(1, 0.2 + 0.4 * genetics, n)
+
+# Tar deposits (mediator, only affected by smoking)
+tar = np.random.binomial(1, 0.1 + 0.7 * smoking, n)
+
+# Lung cancer (affected by tar and genetics)
+cancer = np.random.binomial(1, 0.05 + 0.3 * tar + 0.2 * genetics, n)
+
+data = pd.DataFrame({
+    'smoking': smoking,
+    'tar': tar,
+    'cancer': cancer,
+    'genetics': genetics
+})
+
+# Compare estimates
+naive = data.groupby('smoking')['cancer'].mean().diff().iloc[-1]
+frontdoor = frontdoor_adjustment(data, 'smoking', 'tar', 'cancer')
+
+print(f"Naive estimate: {naive:.3f}")
+print(f"Front-door estimate: {frontdoor:.3f}")
+```
+
+---
+
+#### **Day 11 (Friday): Counterfactual Reasoning**
+
+**🎯 Learning Objectives:**
+
+- Compute counterfactuals from SCMs
+- Understand three steps: Abduction, Action, Prediction
+- Apply to real scenarios
+
+**📚 Theory (30 min):**
+
+1. Read: Brady Neal Ch. 4 - "Counterfactuals"
+2. Study: Twin network representation
+
+**💻 Practice (60 min):**
+
+```python
+# Exercise 10: Computing Counterfactuals
+class CounterfactualSCM:
+    def __init__(self, scm):
+        self.scm = scm
+
+    def compute_counterfactual(self, observed_data, intervention, target):
+        """
+        Three steps of counterfactual inference:
+        1. Abduction: Infer noise from observed data
+        2. Action: Apply intervention
+        3. Prediction: Compute outcome
+        """
+        # Step 1: Abduction - infer noise values
+        noise = self.infer_noise(observed_data)
+
+        # Step 2: Action - modify SCM
+        modified_scm = self.scm.intervene(intervention)
+
+        # Step 3: Prediction - compute with inferred noise
+        counterfactual_data = modified_scm.predict(noise)
+
+        return counterfactual_data[target]
+
+    def infer_noise(self, observed_data):
+        # Inverse of structural equations
+        pass
+
+# Example: "What if this patient had exercised?"
+patient_data = {
+    'age': 45,
+    'exercise': 0,  # Didn't exercise
+    'diet_quality': 3,
+    'health_score': 65  # Observed outcome
+}
+
+# Counterfactual query
+cf_health = compute_counterfactual(
+    observed_data=patient_data,
+    intervention={'exercise': 1},
+    target='health_score'
+)
+
+print(f"Actual health score: {patient_data['health_score']}")
+print(f"Counterfactual (if exercised): {cf_health}")
+print(f"Individual treatment effect: {cf_health - patient_data['health_score']}")
+```
+
+---
+
+#### **Day 12 (Saturday): Week 2 Integration**
+
+**💻 Week 2 Project: "Build a Complete Causal Analysis System"**
+
+Create an end-to-end system that:
+
+1. Takes a dataset and causal graph
+2. Identifies causal effects
+3. Estimates effects using multiple methods
+4. Computes counterfactuals
+5. Validates assumptions
+
+```python
+class CausalAnalysisSystem:
+    def __init__(self, data, graph):
+        self.data = data
+        self.graph = graph
+        self.model = CausalModel(data, graph)
+
+    def full_analysis(self, treatment, outcome):
+        results = {}
+
+        # 1. Identification
+        results['identified'] = self.identify(treatment, outcome)
+
+        # 2. Estimation (multiple methods)
+        results['estimates'] = self.estimate_all(treatment, outcome)
+
+        # 3. Counterfactuals
+        results['counterfactuals'] = self.compute_counterfactuals()
+
+        # 4. Sensitivity analysis
+        results['sensitivity'] = self.sensitivity_analysis()
+
+        # 5. Visualization
+        self.visualize_results(results)
+
+        return results
+```
+
+---
+
+### 🗓️ Week 3: Potential Outcomes & Causal Estimands
+
+#### **Day 13-18: Detailed Daily Plans**
+
+[Continuing with same detailed format for remaining days...]
+
+**Day 13: Potential Outcomes Framework**
+
+- Rubin Causal Model basics
+- Fundamental problem of causal inference
+- Connection to SCMs
+
+**Day 14: Treatment Effects Zoo**
+
+- ATE, ATT, ATC, LATE, CATE
+- When to use each estimand
+- Practical examples
+
+**Day 15: Identification Assumptions**
+
+- SUTVA, Ignorability, Positivity
+- Testing assumptions
 - Sensitivity analysis
-- Professional visualizations
-- Technical documentation
-- Executive summary
-- Code on GitHub
 
-#### Day 6: Project Presentation Preparation
-- **Task (2 hours):**
-  - Prepare presentation slides
-  - Practice explaining to technical and non-technical audiences
-  - Refine visualizations
-  - Prepare FAQ/defense of choices
+**Day 16: Randomized Experiments**
 
----
+- Gold standard causality
+- Design considerations
+- Analysis of experiments
 
-### Week 12: Portfolio Project 2 & Course Completion
+**Day 17: Observational Studies**
 
-#### Days 1-4: Second Major Project
-**Choose a different domain/method from Week 11 (2 hours/day × 4 days = 8 hours)**
+- Challenges and solutions
+- Covariate selection
+- Diagnostic checks
 
-Follow same structure as Week 11 but focus on different application or method to demonstrate breadth.
+**Day 18: Week 3 Project**
 
-#### Day 5: Course Review and Reflection
-- **Activities (2 hours):**
-  - Review all phases and concepts
-  - Identify areas for continued learning
-  - Update personal causal inference roadmap
-  - Organize all notes and projects
-  - Create personal reference guide
-  - Write reflection on learning journey
-
-#### Day 6: Final Integration and Next Steps
-- **Activities (2 hours):**
-  - Create portfolio website/GitHub showcase
-  - Write blog post on learnings
-  - Identify next advanced topics to study
-  - Join causal inference community
-  - Plan how to apply learnings to work
-  - Set up system for staying current
+- Complete RCT analysis
+- Compare to observational approach
+- Document limitations
 
 ---
 
-## Supplementary Resources by Phase
+## 📅 Phase 2: Core Methods (Weeks 4-6)
 
-### Phase 1 Resources
-- **Primary:** Brady Neal's course and textbook
-- **Videos:** YouTube lectures on causality basics
-- **Practice:** DoWhy tutorials and examples
-- **Community:** PyWhy discussions on GitHub
+_Mastering Essential Techniques_
 
-### Phase 2 Resources
-- **Primary:** CausalML book and EconML documentation
-- **Videos:** Stanford GSB causal inference course
-- **Practice:** Benchmark datasets (Lalonde, IHDP)
-- **Papers:** Classic papers on each method
+### 🗓️ Week 4: Matching and Weighting
 
-### Phase 3 Resources
-- **Primary:** causal-learn documentation, research papers
-- **Videos:** Recent conference tutorials (UAI, ICML)
-- **Practice:** Synthetic data with known ground truth
-- **Advanced:** Latest arXiv papers
+#### Daily Breakdown:
 
-### Phase 4 Resources
-- **Primary:** Industry case studies and blog posts
-- **Datasets:** Kaggle, UCI, domain-specific repositories
-- **Inspiration:** Tech company engineering blogs
-- **Community:** Conferences, Twitter/LinkedIn discussions
+- **Day 19:** Exact and coarsened matching
+- **Day 20:** Propensity score estimation
+- **Day 21:** Propensity score matching
+- **Day 22:** Inverse probability weighting
+- **Day 23:** Doubly robust methods
+- **Day 24:** Week 4 Project
 
----
+#### Week 4 Hands-on Project:
 
-## Progress Tracking
+**"Evaluating Job Training Program"**
+Using LaLonde dataset, implement:
 
-### Weekly Checklist
-- [ ] Completed all 5-6 sessions
-- [ ] Took notes on key concepts
-- [ ] Completed coding exercises
-- [ ] Finished mini-project/review
-- [ ] Identified questions/challenges
-- [ ] Updated learning log
+1. Multiple matching approaches
+2. Balance diagnostics
+3. Sensitivity analysis
+4. Comparison of estimates
 
-### Monthly Assessment (End of each month)
-**Self-Assessment Questions:**
-1. Can I explain key concepts to others?
-2. Can I implement methods from scratch?
-3. Have I completed phase projects?
-4. What concepts need more practice?
-5. How confident am I with practical applications?
+### 🗓️ Week 5: Instrumental Variables & Natural Experiments
 
-**Knowledge Check:**
-- After Phase 1: Can you draw DAGs and explain confounding?
-- After Phase 2: Can you estimate treatment effects multiple ways?
-- After Phase 3: Can you discover causal structure?
-- After Phase 4: Can you complete real-world analysis?
+#### Daily Breakdown:
+
+- **Day 25:** IV intuition and assumptions
+- **Day 26:** Two-stage least squares
+- **Day 27:** Weak instruments
+- **Day 28:** Local Average Treatment Effect
+- **Day 29:** Applications and examples
+- **Day 30:** Week 5 Project
+
+### 🗓️ Week 6: Difference-in-Differences & Panel Methods
+
+#### Daily Breakdown:
+
+- **Day 31:** DiD basics and assumptions
+- **Day 32:** Parallel trends testing
+- **Day 33:** Staggered adoption
+- **Day 34:** Synthetic control method
+- **Day 35:** Fixed effects and panel data
+- **Day 36:** Week 6 Project
 
 ---
 
-## Tips for Success
+## 📅 Phase 3: Advanced Methods (Weeks 7-9)
 
-### Daily Habits
-1. **Consistency over intensity:** 2 hours daily beats 14 hours once per week
-2. **Active learning:** Code along, don't just read
-3. **Take notes:** Write concepts in your own words
-4. **Ask questions:** Keep a running list
-5. **Review previous days:** Spend 5 min reviewing yesterday's work
+_Modern ML-Based Approaches_
 
-### When You Get Stuck
-1. Review the fundamentals
-2. Work through simpler examples
-3. Consult multiple resources
-4. Ask in online communities (Stack Overflow, Reddit, GitHub)
-5. Take a break and return fresh
-6. Don't skip - understand before moving on
+### 🗓️ Week 7: Machine Learning for Causal Inference
 
-### Maintaining Motivation
-1. Connect to your interests: Relate examples to your domain
-2. Track progress: Keep learning log
-3. Share progress: Blog, Twitter, LinkedIn
-4. Join community: Engage with others learning
-5. Celebrate milestones: Acknowledge completion of phases
-6. Apply early: Look for opportunities to use at work
+#### Daily Focus Areas:
 
-### Best Practices
-1. **Version control:** Keep all code in Git
-2. **Documentation:** Comment code and write markdown docs
-3. **Reproducibility:** Use virtual environments, seed random states
-4. **Organization:** Clear folder structure for projects
-5. **Visualization:** Create plots to understand concepts
-6. **Testing:** Validate on synthetic data with known answers
+- Double/debiased machine learning
+- Causal forests
+- Meta-learners (S, T, X, R)
+- Targeted learning
+- Cross-fitting techniques
+- Week project: CATE estimation
 
----
+### 🗓️ Week 8: Causal Discovery
 
-## Adapting This Plan
+#### Daily Focus Areas:
 
-### If You Have More Time (3-4 hours/day)
-- Dive deeper into mathematical foundations
-- Read original research papers
-- Contribute to open-source libraries
-- Write blog posts explaining concepts
-- Work on additional projects
+- Constraint-based methods (PC, FCI)
+- Score-based methods (GES, NOTEARS)
+- Functional causal models
+- Time series causal discovery
+- Validation techniques
+- Week project: Discover causal structure
 
-### If You Have Less Time (1 hour/day)
-- Extend the plan to 24 weeks
-- Focus on theory OR practice each day (alternate)
-- Simplify projects
-- Skip some advanced topics initially
-- Return to advanced content later
+### 🗓️ Week 9: Special Topics
 
-### If You Have Specific Focus
-**Academia/Research:**
-- Emphasize theory and proofs
-- Read more papers
-- Focus on causal discovery
-- Learn mathematical details
+#### Daily Focus Areas:
 
-**Industry/Applied:**
-- Emphasize implementation and interpretation
-- Focus on practical libraries
-- More business case studies
-- Portfolio projects with real data
-
-**Specific Domain:**
-- Find domain-specific examples for each concept
-- Connect with domain experts
-- Read domain-specific causal inference literature
-- Build projects relevant to your field
+- Mediation analysis
+- Time-varying treatments
+- Interference and spillovers
+- Missing data and causality
+- Causal inference in RL
+- Integration week project
 
 ---
 
-## Post-Course Continuous Learning
+## 📅 Phase 4: Real-World Application (Weeks 10-12)
+
+_Portfolio Development_
+
+### 🗓️ Week 10: Domain-Specific Applications
+
+Choose your domain and implement:
+
+- Healthcare: Patient outcome prediction
+- Marketing: Campaign optimization
+- Policy: Program evaluation
+- Tech: A/B testing enhancement
+- Finance: Risk assessment
+
+### 🗓️ Week 11: Comprehensive Project
+
+Build end-to-end causal analysis:
+
+1. Problem formulation
+2. Data collection/simulation
+3. Causal model specification
+4. Multiple estimation approaches
+5. Validation and sensitivity
+6. Actionable recommendations
+
+### 🗓️ Week 12: Portfolio & Community
+
+- Create GitHub portfolio
+- Write blog posts
+- Contribute to open source
+- Present findings
+- Network building
+- Plan continued learning
+
+---
+
+## 📊 Progress Tracking System
+
+### Daily Check-in Template
+
+```markdown
+## Day [X] - [Date]
+
+### ✅ Completed
+
+- [ ] Theory reading (30 min)
+- [ ] Coding exercise (60 min)
+- [ ] Notes/reflection (15 min)
+- [ ] Question logged
+
+### 💡 Key Insights
+
+1.
+2.
+3.
+
+### 🤔 Questions/Struggles
+
+-
+
+### 🎯 Tomorrow's Focus
+
+-
+
+### ⏱️ Time Logged: **\_** hours
+```
+
+### Weekly Review Template
+
+```markdown
+## Week [X] Review
+
+### 🎓 Concepts Mastered
+
+- [ ]
+- [ ]
+- [ ]
+
+### 💻 Code Completed
+
+- [ ] All exercises
+- [ ] Mini-project
+- [ ] GitHub commits
+
+### 📈 Self-Assessment (1-5)
+
+- Understanding: \_\_\_
+- Implementation: \_\_\_
+- Confidence: \_\_\_
+
+### 🚀 Next Week Prep
+
+-
+```
+
+### Phase Completion Checklist
+
+#### Phase 1 ✓
+
+- [ ] Can draw and interpret DAGs
+- [ ] Understand confounding, mediation, collision
+- [ ] Can identify causal effects
+- [ ] Built first causal model
+- [ ] Completed 3 mini-projects
+
+#### Phase 2 ✓
+
+- [ ] Implemented propensity score methods
+- [ ] Applied instrumental variables
+- [ ] Used difference-in-differences
+- [ ] Understand assumptions and limitations
+- [ ] Completed method comparison project
+
+#### Phase 3 ✓
+
+- [ ] Applied ML to causal inference
+- [ ] Discovered causal structure from data
+- [ ] Handled complex scenarios
+- [ ] Built reusable code library
+- [ ] Completed advanced project
+
+#### Phase 4 ✓
+
+- [ ] Solved real-world problem
+- [ ] Created portfolio pieces
+- [ ] Wrote technical blog posts
+- [ ] Connected with community
+- [ ] Have job-ready skills
+
+---
+
+## 💪 Overcoming Common Challenges
+
+### Challenge 1: "The Math is Too Hard"
+
+**Solutions:**
+
+- Start with intuition, then formalize
+- Use simulations to understand
+- Find visual explanations
+- Join study groups
+- Accept gradual understanding
+
+### Challenge 2: "I Don't Have Real Data"
+
+**Solutions:**
+
+- Use simulation (you control ground truth!)
+- Kaggle datasets
+- UCI repository
+- Generate synthetic data
+- Public government data
+
+### Challenge 3: "Too Many Methods to Learn"
+
+**Solutions:**
+
+- Master one method deeply first
+- Understand when each applies
+- Build personal cheat sheet
+- Focus on your domain's common methods
+
+### Challenge 4: "Can't Find Time"
+
+**Solutions:**
+
+- Morning routine before work
+- Lunch break theory reading
+- Weekend project time
+- Reduce to 1 hour but stay consistent
+- Track time to find gaps
+
+### Challenge 5: "Feeling Overwhelmed"
+
+**Solutions:**
+
+- Review fundamentals
+- Take breaks when needed
+- Celebrate small wins
+- Connect with others learning
+- Remember: confusion is part of learning
+
+---
+
+## 🛠️ Practical Resources
+
+### Essential Bookmarks
+
+#### Documentation
+
+- [DoWhy Docs](https://py-why.github.io/dowhy/)
+- [EconML Docs](https://econml.azurewebsites.net/)
+- [CausalML Docs](https://causalml.readthedocs.io/)
+
+#### Tutorials
+
+- [Causal Inference for The Brave and True](https://matheusfacure.github.io/python-causality-handbook/landing-page.html)
+- [Mixtape Sessions](https://mixtape.scunning.com/)
+
+#### Communities
+
+- [PyWhy Discord](https://discord.gg/cSBGb3vsZb)
+- [r/CausalInference](https://reddit.com/r/causalinference)
+- [Online Causal Inference Seminar](https://sites.google.com/view/ocis/)
+
+### Code Snippet Library
+
+```python
+# Quick-start templates for common tasks
+
+# 1. Propensity Score Matching Template
+def ps_matching_pipeline(data, treatment, outcome, covariates):
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.neighbors import NearestNeighbors
+
+    # Estimate propensity scores
+    ps_model = LogisticRegression()
+    ps_model.fit(data[covariates], data[treatment])
+    ps = ps_model.predict_proba(data[covariates])[:, 1]
+
+    # Check overlap
+    check_overlap(ps, data[treatment])
+
+    # Match
+    treated_ps = ps[data[treatment] == 1]
+    control_ps = ps[data[treatment] == 0]
+
+    matcher = NearestNeighbors(n_neighbors=1)
+    matcher.fit(control_ps.reshape(-1, 1))
+    distances, indices = matcher.kneighbors(treated_ps.reshape(-1, 1))
+
+    # Estimate effect
+    treated_outcomes = data[data[treatment] == 1][outcome]
+    matched_control_outcomes = data[data[treatment] == 0].iloc[indices.flatten()][outcome]
+
+    ate = (treated_outcomes - matched_control_outcomes).mean()
+    return ate
+
+# 2. DiD Template
+def difference_in_differences(data, outcome, treatment, time, treated_group):
+    import statsmodels.formula.api as smf
+
+    # Create DiD interaction
+    data['did'] = data[treated_group] * data[time]
+
+    # Run regression
+    formula = f'{outcome} ~ {treated_group} + {time} + did'
+    model = smf.ols(formula, data=data).fit()
+
+    # Extract treatment effect
+    treatment_effect = model.params['did']
+    confidence_interval = model.conf_int().loc['did']
+
+    return {
+        'effect': treatment_effect,
+        'ci_lower': confidence_interval[0],
+        'ci_upper': confidence_interval[1],
+        'model': model
+    }
+
+# 3. Causal Forest Template
+def causal_forest_analysis(X, Y, T, W):
+    from econml.dml import CausalForestDML
+
+    # Initialize and fit
+    cf = CausalForestDML(
+        model_y='auto',
+        model_t='auto',
+        discrete_treatment=True,
+        n_estimators=100,
+        min_samples_leaf=10
+    )
+
+    cf.fit(Y, T, X=X, W=W)
+
+    # Get heterogeneous effects
+    cate = cf.effect(X)
+    cate_lb, cate_ub = cf.effect_interval(X)
+
+    # Feature importance
+    importance = cf.feature_importances_
+
+    return {
+        'cate': cate,
+        'confidence_bounds': (cate_lb, cate_ub),
+        'feature_importance': importance
+    }
+```
+
+### Dataset Resources
+
+#### Benchmark Datasets
+
+1. **LaLonde (1986)** - Job training program
+2. **IHDP** - Infant health and development
+3. **ACIC 2016-2019** - Competition datasets
+4. **Twins** - Twin births and mortality
+5. **JOBS** - Job search intervention
+
+#### Where to Find
+
+- [Causal Inference Datasets](https://github.com/amit-sharma/causal-inference-datasets)
+- [Vanderbilt Biostatistics Datasets](http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets)
+- [Harvard Dataverse](https://dataverse.harvard.edu/)
+
+---
+
+## 🎓 Certification & Recognition
+
+### Building Your Credentials
+
+#### Online Certificates
+
+1. **Coursera** - Penn's Causal Inference Course
+2. **EdX** - Harvard's Causal Diagrams
+3. **Udacity** - Causal Inference Nanodegree
+
+#### Portfolio Pieces
+
+1. **GitHub Repository**
+
+   - Clean, documented code
+   - Multiple methods implemented
+   - Real-world applications
+
+2. **Technical Blog Posts**
+
+   - Method explanations
+   - Case studies
+   - Tutorials
+
+3. **Kaggle Notebooks**
+   - Public analyses
+   - Competition entries
+   - Upvoted contributions
+
+#### Community Involvement
+
+- Answer Stack Overflow questions
+- Contribute to PyWhy ecosystem
+- Present at local meetups
+- Publish on arXiv
+
+---
+
+## 🚀 After the 12 Weeks
+
+### Immediate Next Steps
+
+1. **Week 13-14: Integration**
+
+   - Review all notes
+   - Refactor code library
+   - Polish portfolio projects
+
+2. **Week 15-16: Specialization**
+
+   - Choose focus area
+   - Deep dive into advanced topic
+   - Read recent papers
+
+3. **Month 4+: Application**
+   - Apply at work
+   - Freelance projects
+   - Research collaboration
+   - Open source contribution
+
+### Long-term Learning Path
+
+#### 6 Months
+
+- Master one specialized area
+- Publish first blog post
+- Complete significant project
+- Join research reading group
+
+#### 1 Year
+
+- Conference presentation
+- Contribute to major library
+- Mentor others starting
+- Industry application
+
+#### 2+ Years
+
+- Research publication
+- Package development
+- Thought leadership
+- Teaching/training
 
 ### Staying Current
-1. **Follow researchers:** Twitter, Google Scholar alerts
-2. **Read new papers:** arXiv cs.AI, stat.ML
-3. **Attend conferences:** UAI, ICML, NeurIPS (virtual options)
-4. **Join workshops:** Causal inference workshops
-5. **Contribute to OSS:** PyWhy ecosystem
-6. **Blog/teach:** Best way to solidify knowledge
 
-### Advanced Topics to Explore After Completion
-1. Mediation analysis and path-specific effects
-2. Interference and spillover effects
-3. Time-varying treatments and marginal structural models
-4. Survival analysis and causal inference
-5. Causal inference with missing data
-6. Bayesian causal inference
-7. Causal representation learning
-8. Integration with deep learning
+#### Weekly Habits
 
-### Community Engagement
-1. **GitHub:** Star and contribute to causal inference libraries
-2. **Reddit:** r/CausalInference for discussions
-3. **Stack Overflow:** Ask and answer questions
-4. **LinkedIn/Twitter:** Share insights and connect with practitioners
-5. **Local meetups:** Find or start causal inference study groups
-6. **Online seminars:** Many universities host virtual causal inference seminars
+- Read 1 new paper
+- Code 1 new technique
+- Answer 1 community question
+
+#### Monthly Goals
+
+- Complete mini-project
+- Write blog post
+- Attend virtual seminar
+
+#### Annual Objectives
+
+- Attend conference
+- Major contribution
+- Expand network
 
 ---
 
-## Appendix: Quick Reference
+## 💭 Final Thoughts
 
-### Essential Python Libraries Installation
-```bash
-# Core causal inference
-pip install dowhy econml causalml causalnex
+### Remember These Truths
 
-# Causal discovery
-pip install causal-learn gcastle
+1. **Causality is Hard** - Even experts disagree. Embrace uncertainty.
 
-# Supporting libraries
-pip install numpy pandas matplotlib seaborn scikit-learn
-pip install networkx statsmodels scipy
-pip install jupyter notebook
+2. **Theory + Practice** - Neither alone is sufficient. Balance both.
 
-# Optional but useful
-pip install plotly shap lime
-```
+3. **Domain Knowledge Matters** - Causal inference isn't just statistics.
 
-### Recommended Folder Structure
-```
-causal-ai-learning/
-├── week-01/
-│   ├── day-01-theory-notes.md
-│   ├── day-01-practice.ipynb
-│   ├── day-06-mini-project.ipynb
-│   └── ...
-├── week-02/
-├── ...
-├── projects/
-│   ├── phase1-project/
-│   ├── phase2-project/
-│   └── final-projects/
-├── datasets/
-├── papers/
-└── README.md (personal learning log)
-```
+4. **Start Simple** - Master basics before advanced methods.
 
-### Key Terminology Quick Reference
+5. **Community Helps** - Don't learn in isolation.
 
-| Term | Meaning |
-|------|---------|
-| **ATE** | Average Treatment Effect |
-| **CATE** | Conditional Average Treatment Effect |
-| **DAG** | Directed Acyclic Graph |
-| **SCM** | Structural Causal Model |
-| **do-operator** | Intervention notation P(Y\|do(X)) |
-| **Confounder** | Variable affecting both treatment and outcome |
-| **Collider** | Variable affected by two others |
-| **Mediator** | Variable on causal path |
-| **SUTVA** | Stable Unit Treatment Value Assumption |
-| **Propensity Score** | Probability of receiving treatment |
-| **IPW** | Inverse Probability Weighting |
-| **AIPW** | Augmented IPW (doubly robust) |
-| **IV** | Instrumental Variable |
-| **DiD** | Difference-in-Differences |
-| **RDD** | Regression Discontinuity Design |
-| **ITE** | Individual Treatment Effect |
+6. **Apply Early** - Look for causal questions everywhere.
 
-### Useful Cheatsheets to Create
-1. DAG interpretation guide
-2. Method selection flowchart
-3. Assumption checklist by method
-4. Library comparison table
-5. Common pitfalls and solutions
+7. **Document Everything** - Your future self will thank you.
+
+8. **Confusion is Normal** - It means you're learning.
+
+9. **Quality > Quantity** - Deep understanding beats surface knowledge.
+
+10. **It's a Journey** - Causal thinking changes how you see the world.
 
 ---
 
-## Your Learning Journey Starts Now!
+## 📌 Quick Start Checklist
 
-Remember: Causal inference is both an art and a science. The theory provides the foundation, but practical experience builds intuition. Don't aim for perfection - aim for consistent progress.
+**Right Now (10 minutes):**
 
-**Start with Day 1, and build from there. Good luck!**
+- [ ] Create learning folder structure
+- [ ] Install Python and Jupyter
+- [ ] Join PyWhy Discord
+- [ ] Bookmark this guide
+- [ ] Schedule first 2-hour block
+
+**Today:**
+
+- [ ] Install core libraries
+- [ ] Download first dataset
+- [ ] Read Day 1 materials
+- [ ] Write learning goals
+
+**This Week:**
+
+- [ ] Complete Days 1-6
+- [ ] Join one community
+- [ ] Find accountability partner
+- [ ] Share learning publicly
 
 ---
 
-**Last Updated:** November 2024
+**Your causal inference journey starts now. Block 2 hours tomorrow and begin with Day 1.**
 
-**Note:** This plan is designed to be flexible. Adjust pacing based on your background, learning style, and goals. The key is consistent, deliberate practice over time.
+_Remember: Every expert was once a beginner who didn't give up._
+
+---
+
+**Version:** 2.0  
+**Last Updated:** November 2024  
+**Feedback:** Welcome via GitHub issues  
+**License:** CC BY-SA 4.0
+
+---
+
+_"Correlation does not imply causation, but it does waggle its eyebrows suggestively and gesture furtively while mouthing 'look over there'."_ - Randall Munroe, xkcd
